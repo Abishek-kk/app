@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, Platform, StyleSheet, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -23,7 +23,7 @@ export default function App() {
   }, []);
 
   if (!ready) {
-    return (
+    return withWebFrame(
       <SafeAreaProvider>
         <View style={styles.loading}>
           <ActivityIndicator color={colors.navy} size="large" />
@@ -32,7 +32,7 @@ export default function App() {
     );
   }
 
-  return (
+  return withWebFrame(
     <SafeAreaProvider>
       <NavigationContainer>
         <Stack.Navigator
@@ -56,7 +56,30 @@ export default function App() {
   );
 }
 
+function withWebFrame(children) {
+  if (Platform.OS !== 'web') {
+    return children;
+  }
+
+  return (
+    <View style={styles.webPage}>
+      <View style={styles.webFrame}>{children}</View>
+    </View>
+  );
+}
+
 const styles = StyleSheet.create({
+  webPage: {
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor: '#D8DAE8',
+  },
+  webFrame: {
+    flex: 1,
+    width: '100%',
+    maxWidth: 430,
+    backgroundColor: colors.background,
+  },
   loading: {
     flex: 1,
     alignItems: 'center',
