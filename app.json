@@ -1,0 +1,32 @@
+{
+  "expo": {
+    "name": "COE Attendance",
+    "slug": "coe-attendance",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "backgroundColor": "#14146B"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSCameraUsageDescription": "COE Attendance needs camera access to capture attendance photos."
+      }
+    },
+    "android": {
+      "permissions": [
+        "CAMERA"
+      ]
+    },
+    "plugins": [
+      "expo-sqlite",
+      "expo-image-picker",
+      "@react-native-community/datetimepicker",
+      "expo-asset"
+    ]
+  }
+}
